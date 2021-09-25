@@ -1,6 +1,8 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using JobSearch.ApplicationCore.UseCases.Queries.Job;
+using JobSearch.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -21,13 +23,13 @@ namespace JobSearch.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(CancellationToken cancellationToken = default)
+        public async Task<List<Job>> Get(CancellationToken cancellationToken = default)
         {
             var request = new GetJobModel();
 
             var jobs = await _mediator.Send(request, cancellationToken);
-            
-            return Ok(jobs);
+
+            return jobs;
         }
     }
 }

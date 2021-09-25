@@ -1,22 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Reflection;
 using System.Threading;
-using System.Threading.Tasks;
-using Autofac;
+using JobSearch.ApplicationCore;
 using JobSearch.ApplicationCore.Common.Abstractions.DataSeed;
-using JobSearch.Infrastructure.DataSeed;
 using JobSearch.Infrastructure.IoC.ApplicationCore;
 using JobSearch.Infrastructure.IoC.Infrastructure;
 using JobSearch.Infrastructure.IoC.WebApi;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 namespace JobSearch.Api
@@ -30,31 +23,15 @@ namespace JobSearch.Api
 
         public IConfiguration Configuration { get; }
 
-        /// <summary>
-        /// Configure autofac dependencies.
-        /// </summary>
-        /// <param name="builder">Builder.</param>
-        // ConfigureContainer is where you can register things directly
-        // with Autofac. This runs after ConfigureServices so the things
-        // here will override registrations made in ConfigureServices.
-        // Don't build the container; that gets done for you. If you
-        // need a reference to the container, you need to use the
-        // "Without ConfigureContainer" mechanism shown later.
-        public void ConfigureContainer(ContainerBuilder builder)
-        {
-            builder.AddMediatR();
-        }
-        
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOptions();
+            services.AddMediatR();
             services.AddConfigurations(Configuration);
-            
             services.AddDatabase(Configuration);
             services.RegisterRepositories();
             
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

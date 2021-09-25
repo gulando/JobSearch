@@ -1,23 +1,15 @@
-using Autofac;
+using JobSearch.ApplicationCore;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace JobSearch.Infrastructure.IoC.ApplicationCore
 {
     public static class ApplicationCoreModule
     {
-        public static void AddMediatR(this ContainerBuilder builder)
+        public static IServiceCollection AddMediatR(this IServiceCollection services)
         {
-            builder
-                .RegisterType<Mediator>()
-                .As<IMediator>()
-                .InstancePerLifetimeScope();
-            
-            // request & notification handlers
-            builder.Register<ServiceFactory>(context =>
-            {
-                var c = context.Resolve<IComponentContext>();
-                return t => c.Resolve(t);
-            }).InstancePerLifetimeScope();
+            return services.AddMediatR(typeof(MediatREntryPoint).Assembly);
+
         }
     }
 }
