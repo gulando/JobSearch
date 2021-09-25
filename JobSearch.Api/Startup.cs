@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Autofac;
+using JobSearch.ApplicationCore.Common.Abstractions.DataSeed;
 using JobSearch.Infrastructure.DataSeed;
+using JobSearch.Infrastructure.IoC.ApplicationCore;
 using JobSearch.Infrastructure.IoC.Infrastructure;
 using JobSearch.Infrastructure.IoC.WebApi;
 using Microsoft.AspNetCore.Builder;
@@ -27,6 +30,21 @@ namespace JobSearch.Api
 
         public IConfiguration Configuration { get; }
 
+        /// <summary>
+        /// Configure autofac dependencies.
+        /// </summary>
+        /// <param name="builder">Builder.</param>
+        // ConfigureContainer is where you can register things directly
+        // with Autofac. This runs after ConfigureServices so the things
+        // here will override registrations made in ConfigureServices.
+        // Don't build the container; that gets done for you. If you
+        // need a reference to the container, you need to use the
+        // "Without ConfigureContainer" mechanism shown later.
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.AddMediatR();
+        }
+        
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -35,6 +53,7 @@ namespace JobSearch.Api
             
             services.AddDatabase(Configuration);
             services.RegisterRepositories();
+            
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

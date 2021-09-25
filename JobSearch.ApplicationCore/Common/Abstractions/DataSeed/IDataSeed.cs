@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace JobSearch.Infrastructure.DataSeed
+namespace JobSearch.ApplicationCore.Common.Abstractions.DataSeed
 {
     public interface IDataSeed
     {

@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using JobSearch.ApplicationCore.Common.Abstractions.DataSeed;
 using JobSearch.Domain.Entities;
 using JobSearch.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;

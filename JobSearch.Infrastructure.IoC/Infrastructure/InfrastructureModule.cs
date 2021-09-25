@@ -1,5 +1,8 @@
+using JobSearch.ApplicationCore.Common.Abstractions.DataSeed;
+using JobSearch.ApplicationCore.Common.Abstractions.Repositories;
 using JobSearch.Infrastructure.Context;
 using JobSearch.Infrastructure.DataSeed;
+using JobSearch.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +20,7 @@ namespace JobSearch.Infrastructure.IoC.Infrastructure
         public static IServiceCollection RegisterRepositories(this IServiceCollection services)
         {
             return services
+                .AddScoped<IJobRepository, JobRepository>()   
                 .AddSingleton<IDataSeed, DataSeed.DataSeed>();
         }
     }
