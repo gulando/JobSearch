@@ -1,0 +1,14 @@
+[
+  {
+    "Id": 1,
+    "Name": "Full-Time"
+  },
+  {
+    "Id": 2,
+    "Name": "Part-Time"
+  },
+  {
+    "Id": 3,
+    "Name": "Intern"
+  }
+]

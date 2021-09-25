@@ -11,7 +11,7 @@ namespace JobSearch.Infrastructure.Configurations
             builder.HasKey(x => x.Id);
             builder.ToTable(nameof(EmploymentType));
 
-            builder.Property(b => b.Type).IsRequired();
+            builder.Property(b => b.Name).IsRequired();
         }
     }
 }

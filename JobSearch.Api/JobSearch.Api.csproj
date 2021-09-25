@@ -9,4 +9,9 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\JobSearch.ApplicationCore\JobSearch.ApplicationCore.csproj" />
+      <ProjectReference Include="..\JobSearch.Infrastructure.IoC\JobSearch.Infrastructure.IoC.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -1,0 +1,23 @@
+[
+  {
+    "Title": "Senior Software Engineer",
+    "LocationId": 1,
+    "CompanyId": 1,
+    "CategoryId": 1,
+    "EmploymentTypeId": 1
+   },
+  {
+    "Title": "Junior Software Engineer",
+    "LocationId": 2,
+    "CompanyId": 2,
+    "CategoryId": 2,
+    "EmploymentTypeId": 2
+  },
+  {
+    "Title": "Mid Software Engineer",
+    "LocationId": 3,
+    "CompanyId": 3,
+    "CategoryId": 3,
+    "EmploymentTypeId": 3
+  }
+]
