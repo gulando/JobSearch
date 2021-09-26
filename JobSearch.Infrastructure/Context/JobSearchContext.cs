@@ -29,13 +29,13 @@ namespace JobSearch.Infrastructure.Context
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
+
             builder.ApplyConfiguration(new JobConfiguration());
             builder.ApplyConfiguration(new CompanyConfiguration());
             builder.ApplyConfiguration(new LocationConfiguration());
             builder.ApplyConfiguration(new CategoryConfiguration());
             builder.ApplyConfiguration(new EmploymentTypeConfiguration());
-            
-            base.OnModelCreating(builder);
         }
     }
 }

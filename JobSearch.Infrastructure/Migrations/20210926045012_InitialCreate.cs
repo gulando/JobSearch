@@ -8,7 +8,7 @@ namespace JobSearch.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "categories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -17,11 +17,11 @@ namespace JobSearch.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.Id);
+                    table.PrimaryKey("PK_categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Company",
+                name: "companies",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -30,11 +30,11 @@ namespace JobSearch.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Company", x => x.Id);
+                    table.PrimaryKey("PK_companies", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmploymentType",
+                name: "employmentTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -43,11 +43,11 @@ namespace JobSearch.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmploymentType", x => x.Id);
+                    table.PrimaryKey("PK_employmentTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Location",
+                name: "locations",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -56,87 +56,87 @@ namespace JobSearch.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Location", x => x.Id);
+                    table.PrimaryKey("PK_locations", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Job",
+                name: "jobs",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "text", nullable: false),
-                    LocationId = table.Column<int>(type: "integer", nullable: true),
-                    CompanyId = table.Column<int>(type: "integer", nullable: true),
-                    CategoryId = table.Column<int>(type: "integer", nullable: true),
-                    EmploymentTypeId = table.Column<int>(type: "integer", nullable: true)
+                    CompanyId = table.Column<int>(type: "integer", nullable: false),
+                    LocationId = table.Column<int>(type: "integer", nullable: false),
+                    CategoryId = table.Column<int>(type: "integer", nullable: false),
+                    EmploymentTypeId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Job", x => x.Id);
+                    table.PrimaryKey("PK_jobs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Job_Category_CategoryId",
+                        name: "FK_jobs_categories_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "Category",
+                        principalTable: "categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Job_Company_CompanyId",
+                        name: "FK_jobs_companies_CompanyId",
                         column: x => x.CompanyId,
-                        principalTable: "Company",
+                        principalTable: "companies",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Job_EmploymentType_EmploymentTypeId",
+                        name: "FK_jobs_employmentTypes_EmploymentTypeId",
                         column: x => x.EmploymentTypeId,
-                        principalTable: "EmploymentType",
+                        principalTable: "employmentTypes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Job_Location_LocationId",
+                        name: "FK_jobs_locations_LocationId",
                         column: x => x.LocationId,
-                        principalTable: "Location",
+                        principalTable: "locations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Job_CategoryId",
-                table: "Job",
+                name: "IX_jobs_CategoryId",
+                table: "jobs",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Job_CompanyId",
-                table: "Job",
+                name: "IX_jobs_CompanyId",
+                table: "jobs",
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Job_EmploymentTypeId",
-                table: "Job",
+                name: "IX_jobs_EmploymentTypeId",
+                table: "jobs",
                 column: "EmploymentTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Job_LocationId",
-                table: "Job",
+                name: "IX_jobs_LocationId",
+                table: "jobs",
                 column: "LocationId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Job");
+                name: "jobs");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "categories");
 
             migrationBuilder.DropTable(
-                name: "Company");
+                name: "companies");
 
             migrationBuilder.DropTable(
-                name: "EmploymentType");
+                name: "employmentTypes");
 
             migrationBuilder.DropTable(
-                name: "Location");
+                name: "locations");
         }
     }
 }

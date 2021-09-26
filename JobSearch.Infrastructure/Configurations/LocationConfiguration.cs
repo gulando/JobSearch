@@ -9,7 +9,7 @@ namespace JobSearch.Infrastructure.Configurations
         public void Configure(EntityTypeBuilder<Location> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.ToTable(nameof(Location));
+            builder.ToTable("locations");
 
             builder.Property(b => b.Name).IsRequired();
         }

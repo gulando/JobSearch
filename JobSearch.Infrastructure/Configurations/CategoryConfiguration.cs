@@ -9,7 +9,7 @@ namespace JobSearch.Infrastructure.Configurations
         public void Configure(EntityTypeBuilder<Category> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.ToTable(nameof(Category));
+            builder.ToTable("categories");
 
             builder.Property(b => b.Name).IsRequired();
         }

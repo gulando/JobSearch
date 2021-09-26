@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
+using JobSearch.ApplicationCore.Common.ResponseModels;
 using JobSearch.ApplicationCore.UseCases.Queries.Job;
-using JobSearch.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -15,21 +16,25 @@ namespace JobSearch.Api.Controllers
     {
         private readonly ILogger<JobController> _logger;
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
-        public JobController(ILogger<JobController> logger, IMediator mediator)
+        public JobController(IMapper mapper, ILogger<JobController> logger, IMediator mediator)
         {
+            _mapper = mapper;
             _logger = logger;
             _mediator = mediator;
         }
 
         [HttpGet]
-        public async Task<List<Job>> Get(CancellationToken cancellationToken = default)
+        public async Task<IActionResult> Get(CancellationToken cancellationToken = default)
         {
             var request = new GetJobModel();
 
             var jobs = await _mediator.Send(request, cancellationToken);
 
-            return jobs;
+            var responseModel = _mapper.Map<List<JobResponseModel>>(jobs);
+
+            return Ok(responseModel);
         }
     }
 }
