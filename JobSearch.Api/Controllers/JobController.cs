@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using JobSearch.ApplicationCore.Common.Error;
 using JobSearch.ApplicationCore.Common.ResponseModels;
 using JobSearch.ApplicationCore.UseCases.Queries.Job;
 using MediatR;
