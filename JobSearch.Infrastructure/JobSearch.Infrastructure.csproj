@@ -19,4 +19,10 @@
       <ProjectReference Include="..\JobSearch.ApplicationCore\JobSearch.ApplicationCore.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Mongo" />
+      <Folder Include="RabbitMQ" />
+      <Folder Include="Redis" />
+    </ItemGroup>
+
 </Project>
